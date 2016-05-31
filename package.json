@@ -10,7 +10,7 @@
     "prepublish": "npm test && npm run build",
     "2npm": "./node_modules/.bin/publish",
     "lint": "./node_modules/.bin/xo",
-    "test:run": "NODE_ENV=test ./node_modules/.bin/mocha --opts ./config/mocha.opts $(find . -path './**/__tests__/*.test.js' ! -ipath '*node_modules')",
+    "test:run": "NODE_ENV=test ./node_modules/.bin/mocha --opts ./config/mocha.opts $(find . -path './**/__tests__/*.test.js' -not -path '*node_modules*')",
     "test": "npm run lint && npm run test:run"
   },
   "keywords": [
