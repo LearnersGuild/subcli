@@ -1,6 +1,6 @@
 {
   "name": "subcli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "helpers for creating command-line interfaces that support subcommands",
   "main": "lib",
   "scripts": {
@@ -28,7 +28,7 @@
     "name": "Jeffrey Wescott",
     "email": "jeffrey@learnersguild.org"
   },
-  "license": "UNLICENSED",
+  "license": "ISC",
   "dependencies": {
     "cliclopts": "^1.1.1",
     "minimist": "^1.2.0",
