@@ -4,7 +4,7 @@ Here's how we'd like you to contribute.
 
 Clone the repo, then create a branch:
 
-    $ git clone git@github.com:LearnersGuild/command-parser
+    $ git clone git@github.com:LearnersGuild/subcli
     $ git co -b <branch name>
 
 Make sure the tests pass:
@@ -24,5 +24,5 @@ Someone else will review your code and merge the PR.
 Please follow our [best practices][best-practices] when working.
 
 
-[pr]: https://github.com/LearnersGuild/command-parser/compare/
+[pr]: https://github.com/LearnersGuild/subcli/compare/
 [best-practices]: https://learnersguild.github.io/product-development/best-practices/index.html
