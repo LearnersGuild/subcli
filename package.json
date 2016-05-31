@@ -51,7 +51,8 @@
   },
   "xo": {
     "ignore": [
-      "lib/**"
+      "lib/**",
+      "example/index.js"
     ],
     "rules": {
       "comma-dangle": [
