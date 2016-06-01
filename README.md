@@ -22,7 +22,21 @@ The `parse` command returns a JavaScript object, where the `_` attributes stores
 
 You can optionally pass the results from the `parse` function to the `usage` function as its second argument. If you do so, `subcli` will be smart enough to determine whether or not a `-h` or `--help` command was passed, either for the parent command or for the subcommand. If it was, the usage message will be returned (for either the parent command or the subcommand as appropriate). Otherwise, it will be `undefined`. If you _don't_ pass the return value from `parse`, then the usage message for the parent command will be returned.
 
-For example:
+### Command Descriptor Attributes
+
+The following attributes are supported in command descriptors:
+
+- `name` primary name of option
+- `abbr` one character alias of the option
+- `alias` other options treated as alias
+- `boolean` if `true`, the option is seen as a boolean flag
+- `help` usage string for the option
+- `default` default value of the option
+- `commands` nested subcommands, which also support this same list of attributes
+
+It's worth noting that the attributes are an extension of [cliclopts][cliclopts].
+
+### Example
 
 ```javascript
 import {parse, usage} from 'subcli'
@@ -100,7 +114,6 @@ usageMessage = usage(commandDescriptor, args)
 
 See also [the provided example](/example/index.babel.js). Or, run it like so: `node example happy -g`
 
-
 ## Notes
 
 It may help to look at [minimist][minimist] for more detail on how the argument parsing is handled. One thing to note is that, since our command parsing supports the notion of "subcommands", there may be an additional attribute named `$` that contains the positional parameters and options for the subcommand, e.g.:
@@ -139,3 +152,4 @@ See the [LICENSE](./LICENSE) file.
 
 
 [minimist]: https://github.com/substack/minimist
+[cliclopts]: https://github.com/finnp/cliclopts
