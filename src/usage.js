@@ -25,7 +25,7 @@ export function commandList(commands) {
   const commandDescs = commands.map(cmd => (
     sprintf(`    %-${maxCommandWidth}s - %s`, cmd.name, cmd.description)
   ))
-  return `\nCommands:\n${commandDescs.join('\n')}\n`
+  return `\nCommands:\n${commandDescs.join('\n')}`
 }
 
 export function optionList(options) {
@@ -34,7 +34,18 @@ export function optionList(options) {
   }
 
   const cliOpts = cliclopts(options)
-  return `Options:\n${cliOpts.usage()}`
+  return `\nOptions:\n${cliOpts.usage()}`
+}
+
+export function exampleList(examples) {
+  if (!examples || examples.length === 0) {
+    return ''
+  }
+
+  const exampleDescs = examples.map(expl => (
+    sprintf(`    # %s\n    %s\n`, expl.description, expl.example)
+  ))
+  return `Examples:\n${exampleDescs.join('\n')}`
 }
 
 function commandDescriptorIncludesDefaultHelp(commandDescriptor) {
@@ -50,7 +61,8 @@ export function usageMessage(commandDescriptor, parentCommand = null) {
   return `${fullCommandName} - ${commandDescriptor.description}
 ${usageInfo(commandDescriptor.usage || commandDescriptor.name, parentCommand)}
 ${commandList(commandDescriptor.commands)}
-${optionList(commandDescriptor.options)}`
+${optionList(commandDescriptor.options)}
+${exampleList(commandDescriptor.examples)}`
 }
 
 export default function usage(cd, args = null, options = DEFAULT_OPTIONS) {
