@@ -62,24 +62,6 @@ describe(testContext(__filename), function () {
     })
   })
 
-  describe('exampleList', function () {
-    it('returns empty string if there are no examples', function () {
-      expect(exampleList(undefined)).to.equal('')
-      expect(exampleList(null)).to.equal('')
-      expect(exampleList([])).to.equal('')
-    })
-
-    it('returns examples with their descriptions', function () {
-      const lines = exampleList(this.commandDescriptor.examples).split('\n').filter(line => line.length > 0)
-
-      expect(lines[0]).to.match(/Examples:/)
-      expect(lines[1]).to.match(/\/\/.+run command 1 with flag/)
-      expect(lines[2]).to.match(/cmd1 -f/)
-      expect(lines[3]).to.match(/\/\/.+run command 2 with arguments/)
-      expect(lines[4]).to.match(/cmd2 foo bar/)
-    })
-  })
-
   describe('commandList', function () {
     it('returns empty string if there are no commands', function () {
       expect(commandList(undefined)).to.equal('')
@@ -110,16 +92,34 @@ describe(testContext(__filename), function () {
     })
   })
 
+  describe('exampleList', function () {
+    it('returns empty string if there are no examples', function () {
+      expect(exampleList(undefined)).to.equal('')
+      expect(exampleList(null)).to.equal('')
+      expect(exampleList([])).to.equal('')
+    })
+
+    it('returns examples with their descriptions', function () {
+      const lines = exampleList(this.commandDescriptor.examples).split('\n').filter(line => line.length > 0)
+
+      expect(lines[0]).to.match(/Examples:/)
+      expect(lines[1]).to.match(/\/\/.+run command 1 with flag/)
+      expect(lines[2]).to.match(/cmd1 -f/)
+      expect(lines[3]).to.match(/\/\/.+run command 2 with arguments/)
+      expect(lines[4]).to.match(/cmd2 foo bar/)
+    })
+  })
+
   describe('usageMessage', function () {
     it('returns the full usage for the command', function () {
       const lines = usageMessage(this.commandDescriptor).split('\n').filter(line => line.length > 0)
       expect(lines[0]).to.equal(`${this.commandDescriptor.name} - ${this.commandDescriptor.description}`)
       expect(lines.length).to.equal(
-        1 +                                            // name + description
-        5 +                                            // Examples: and example list
-        2 +                                            // Usage: and usage line
-        this.commandDescriptor.commands.length + 1 +   // Commands: and command list
-        this.commandDescriptor.options.length + 1      // Options: and option list
+        1 +                                             // name + description
+        2 +                                             // Usage: and usage line
+        this.commandDescriptor.commands.length + 1 +    // Commands: and command list
+        this.commandDescriptor.options.length + 1 +     // Options: and option list
+        (this.commandDescriptor.examples.length * 2) + 1 // Examples: and example list
       )
     })
 
@@ -147,7 +147,6 @@ describe(testContext(__filename), function () {
     it('returns the parent command usage when "--help" was requested on parent command', function () {
       const args = {_: [], help: true}
       const usageString = usage(this.commandDescriptor, args, {includeHelp: true})
-      console.log(usageString)
       expect(usageString).to.match(/^cmd -/)
     })
 
