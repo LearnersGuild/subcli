@@ -15,19 +15,27 @@ describe(testContext(__filename), function () {
       description: 'test command',
       usage: 'cmd [options] <argument>',
       examples: [{
-        example: 'cmd1 -f',
-        description: 'run command 1 with flag'
+        example: 'cmd --second',
+        description: 'run command with second option'
       }, {
-        example: 'cmd2 foo bar',
-        description: 'run command 2 with arguments'
+        example: 'cmd foo bar',
+        description: 'run command with arguments'
       }],
       commands: [{
         name: 'cmd1',
         description: 'desc1',
         usage: 'cmd1 <arg>',
+        examples: [{
+          example: 'cmd cmd1',
+          description: 'run command 1'
+        }],
       }, {
         name: 'cmd2',
         description: 'desc2',
+        examples: [{
+          example: 'cmd cmd2 foo bar',
+          description: 'run command 2 with arguments'
+        }],
       }],
       options: [{
         name: 'first',
@@ -103,10 +111,10 @@ describe(testContext(__filename), function () {
       const lines = exampleList(this.commandDescriptor.examples).split('\n').filter(line => line.length > 0)
 
       expect(lines[0]).to.match(/Examples:/)
-      expect(lines[1]).to.match(/#.+run command 1 with flag/)
-      expect(lines[2]).to.match(/cmd1 -f/)
-      expect(lines[3]).to.match(/#.+run command 2 with arguments/)
-      expect(lines[4]).to.match(/cmd2 foo bar/)
+      expect(lines[1]).to.match(/#.+run command with second option/)
+      expect(lines[2]).to.match(/cmd --second/)
+      expect(lines[3]).to.match(/#.+run command with arguments/)
+      expect(lines[4]).to.match(/cmd foo bar/)
     })
   })
 
