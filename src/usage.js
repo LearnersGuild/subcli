@@ -14,6 +14,17 @@ export function usageInfo(usage, parentCommand = null) {
   return `\nUsage:\n    ${usageString}`
 }
 
+export function exampleList(examples) {
+  if (!examples || examples.length === 0) {
+    return ''
+  }
+
+  const exampleDescs = examples.map(expl => (
+    sprintf(`    // %s\n    %s`, expl.description, expl.example)
+  ))
+  return `\nExamples:\n${exampleDescs.join('\n')}\n`
+}
+
 export function commandList(commands) {
   if (!commands || commands.length === 0) {
     return ''
@@ -49,6 +60,7 @@ export function usageMessage(commandDescriptor, parentCommand = null) {
   const fullCommandName = parentCommand ? `${parentCommand} ${commandDescriptor.name}` : commandDescriptor.name
   return `${fullCommandName} - ${commandDescriptor.description}
 ${usageInfo(commandDescriptor.usage || commandDescriptor.name, parentCommand)}
+${exampleList(commandDescriptor.examples)}
 ${commandList(commandDescriptor.commands)}
 ${optionList(commandDescriptor.options)}`
 }
