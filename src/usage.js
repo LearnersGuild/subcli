@@ -43,7 +43,7 @@ export function exampleList(examples) {
   }
 
   const exampleDescs = examples.map(expl => (
-    sprintf(`    // %s\n    %s\n`, expl.description, expl.example)
+    sprintf(`    # %s\n    %s\n`, expl.description, expl.example)
   ))
   return `Examples:\n${exampleDescs.join('\n')}`
 }

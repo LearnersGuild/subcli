@@ -103,9 +103,9 @@ describe(testContext(__filename), function () {
       const lines = exampleList(this.commandDescriptor.examples).split('\n').filter(line => line.length > 0)
 
       expect(lines[0]).to.match(/Examples:/)
-      expect(lines[1]).to.match(/\/\/.+run command 1 with flag/)
+      expect(lines[1]).to.match(/#.+run command 1 with flag/)
       expect(lines[2]).to.match(/cmd1 -f/)
-      expect(lines[3]).to.match(/\/\/.+run command 2 with arguments/)
+      expect(lines[3]).to.match(/#.+run command 2 with arguments/)
       expect(lines[4]).to.match(/cmd2 foo bar/)
     })
   })
