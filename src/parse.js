@@ -43,7 +43,8 @@ function getParseOptions(commandDescriptor) {
   return options
 }
 
-export default function parse(cd, argv, options = DEFAULT_OPTIONS) {
+export default function parse(cd, rawArgv, options = DEFAULT_OPTIONS) {
+  const argv = rawArgv.filter(arg => arg.trim().length > 0)
   const commandDescriptor = options.includeHelp ? addHelpOption(cd) : cd
   const parseOptions = getParseOptions(commandDescriptor)
   let args = parseArgs(argv, parseOptions)

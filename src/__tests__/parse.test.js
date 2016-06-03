@@ -40,6 +40,13 @@ describe(testContext(__filename), function () {
   })
 
   describe('parse', function () {
+    it('filters out whitespace or empty string arguments', function () {
+      const args = parse(this.commandDescriptor, ['', '-h', '  ', '\t\n', '-w500'])
+      expect(args._).to.be.empty
+      expect(args.when).to.equal(500)
+      expect(args.h).to.be.ok
+    })
+
     it('throws if an unknown option is passed', function () {
       const callParse = () => parse(this.commandDescriptor, ['-x'])
       expect(callParse).to.throw('Unknown option: -x')
