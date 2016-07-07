@@ -45,7 +45,7 @@ export function optionList(options, maxWidth = Number.MAX_SAFE_INTEGER) {
   return `\nOptions:\n${cliOpts.usage()}`
 }
 
-export function exampleList(examples, maxWidth = Number.MAX_SAFE_INTEGER) {
+export function exampleList(examples, maxWidth = Number.MAX_SAFE_INTEGER, commandPrefix = '') {
   if (!examples || examples.length === 0) {
     return ''
   }
@@ -54,7 +54,7 @@ export function exampleList(examples, maxWidth = Number.MAX_SAFE_INTEGER) {
   const wrap = wordwrap(0, maxWidth - descPrefix.length)
   const exampleDescs = examples.map(expl => {
     const desc = wrap(expl.description).split('\n').join(`\n${descPrefix}`)
-    return sprintf(`%s%s\n    %s\n`, descPrefix, desc, expl.example)
+    return sprintf(`%s%s\n    %s%s\n`, descPrefix, desc, commandPrefix, expl.example)
   })
   return `Examples:\n${exampleDescs.join('\n')}`
 }
@@ -74,7 +74,7 @@ export function usageMessage(commandDescriptor, parentCommand = null, commandPre
 ${usageInfo(commandDescriptor.usage || commandDescriptor.name, parentCommand, prefix)}
 ${commandList(commandDescriptor.commands, maxWidth)}
 ${optionList(commandDescriptor.options, maxWidth)}
-${exampleList(commandDescriptor.examples, maxWidth)}`
+${exampleList(commandDescriptor.examples, maxWidth, prefix)}`
 }
 
 export default function usage(cd, args = null, opts = {}) {

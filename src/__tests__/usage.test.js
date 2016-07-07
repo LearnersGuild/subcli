@@ -169,6 +169,8 @@ describe(testContext(__filename), function () {
     it('prefixes the command properly', function () {
       const usageString = usage(this.commandDescriptor, null, {commandPrefix: '/'})
       expect(usageString).to.match(/^\/cmd -[\s\S]+\/cmd/)
+      expect(usageString).to.match(/\/cmd foo bar/)
+      expect(usageString).to.match(/\/cmd --second/)
     })
   })
 
