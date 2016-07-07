@@ -23,7 +23,7 @@ describe(testContext(__filename), function () {
       }],
       commands: [{
         name: 'cmd1',
-        description: 'desc1',
+        description: 'description for the first command',
         usage: 'cmd1 <arg>',
         examples: [{
           example: 'cmd cmd1',
@@ -31,7 +31,7 @@ describe(testContext(__filename), function () {
         }],
       }, {
         name: 'cmd2',
-        description: 'desc2',
+        description: 'description for the second command',
         examples: [{
           example: 'cmd cmd2 foo bar',
           description: 'run command 2 with arguments'
@@ -80,8 +80,8 @@ describe(testContext(__filename), function () {
     it('returns commands with their descriptions', function () {
       const lines = commandList(this.commandDescriptor.commands).split('\n').filter(line => line.length > 0)
       expect(lines[0]).to.match(/Commands:/)
-      expect(lines[1]).to.match(/cmd1.+desc1/)
-      expect(lines[2]).to.match(/cmd2.+desc2/)
+      expect(lines[1]).to.match(/cmd1.+description for the first command/)
+      expect(lines[2]).to.match(/cmd2.+description for the second command/)
     })
   })
 
@@ -162,6 +162,22 @@ describe(testContext(__filename), function () {
       const args = {_: ['cmd1'], $: {cmd1: {_: [], help: true}}}
       const usageString = usage(this.commandDescriptor, args, {includeHelp: true})
       expect(usageString).to.match(/^cmd cmd1 -/)
+    })
+  })
+
+  describe('usage (with commandPrefix option)', function () {
+    it('prefixes the command properly', function () {
+      const usageString = usage(this.commandDescriptor, null, {commandPrefix: '/'})
+      expect(usageString).to.match(/^\/cmd -[\s\S]+\/cmd/)
+    })
+  })
+
+  describe('usage (with maxWidth option)', function () {
+    it('wraps lines longer than the maximum width', function () {
+      const usageString = usage(this.commandDescriptor, null, {maxWidth: 20})
+      expect(usageString).to.match(/description\n\s+for the/)
+      expect(usageString).to.match(/first\n\s+option/)
+      expect(usageString).to.match(/# run command\n\s+# with arguments/)
     })
   })
 })

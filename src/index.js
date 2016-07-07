@@ -5,4 +5,6 @@ export {default as usage} from './usage'
 
 export const DEFAULT_OPTIONS = {
   includeHelp: true,
+  commandPrefix: '',
+  maxWidth: Number.MAX_SAFE_INTEGER,
 }

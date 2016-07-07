@@ -89,7 +89,7 @@ let usageMessage = usage(commandDescriptor, args)
 usageMessage = usage(commandDescriptor)
 // usageMessage => the full help text for the act command
 
-args = parse(commandDescriptor), ['-h', 'happy', '-g', '-h'])
+args = parse(commandDescriptor, ['-h', 'happy', '-g', '-h'])
 // args =>
 // { _: [ 'happy', '-g', '-h' ],
 //   be: false,
@@ -100,7 +100,7 @@ args = parse(commandDescriptor), ['-h', 'happy', '-g', '-h'])
 usageMessage = usage(commandDescriptor, args)
 // usageMessage => the full help text for the act command
 
-args = parse(commandDescriptor), ['happy', '-g', '-h'])
+args = parse(commandDescriptor, ['happy', '-g', '-h'])
 // args =>
 // { _: [ 'happy', '-g', '-h' ],
 //   be: false,
