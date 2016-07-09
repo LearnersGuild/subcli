@@ -1,6 +1,6 @@
 {
   "name": "subcli",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "helpers for creating command-line interfaces that support subcommands",
   "main": "lib",
   "scripts": {
