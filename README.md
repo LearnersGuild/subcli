@@ -1,5 +1,9 @@
 # subcli
 
+[![Code Climate GPA](https://codeclimate.com/repos/579a5a36ecc56b00640023ca/badges/002264002290c0bff50d/gpa.svg)](https://codeclimate.com/repos/579a5a36ecc56b00640023ca/feed)
+[![Code Climate Issue Count](https://codeclimate.com/repos/579a5a36ecc56b00640023ca/badges/002264002290c0bff50d/issue_count.svg)](https://codeclimate.com/repos/579a5a36ecc56b00640023ca/feed)
+[![Test Coverage](https://codeclimate.com/repos/579a5a36ecc56b00640023ca/badges/002264002290c0bff50d/coverage.svg)](https://codeclimate.com/repos/579a5a36ecc56b00640023ca/coverage)
+
 Helper utilities for creating command-line interfaces (CLIs) that support subcommands.
 
 Right now, there is a `parse` function and a `usage` function.
